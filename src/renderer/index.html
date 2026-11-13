@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+<title>Startshaper</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body class="is-home">
+<div class="wash" aria-hidden="true"></div>
+<header class="top">
+  <div class="brand"><span class="logo"><i></i></span><span>Startshaper</span><a class="studio-link" href="https://hollowbit.dev/" target="_blank" rel="noopener">by Hollowbit Studio</a></div>
+  <nav class="seg" id="seg" hidden>
+    <span class="seg-pill" id="segPill"></span>
+    <button data-v="startup" class="on">Startup</button>
+    <button data-v="now">Right now</button>
+    <button data-v="changes">Changes <b class="count" id="changesCount" hidden></b></button>
+  </nav>
+  <div class="top-r"><button class="ghost sm" id="again" hidden>Check again</button></div>
+</header>
+
+<main class="stage" id="stage">
+  <!-- start screen -->
+  <section class="home view on" id="home">
+    <div class="gauge" id="gauge" aria-hidden="true">
+      <svg viewBox="0 0 240 140">
+        <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#3ddc84"/><stop offset=".55" stop-color="#ffc061"/><stop offset="1" stop-color="#ff6b5a"/></linearGradient></defs>
+        <path class="g-track" d="M24 124 A96 96 0 0 1 216 124"/>
+        <path class="g-fill" d="M24 124 A96 96 0 0 1 216 124" pathLength="100"/>
+        <g class="g-ticks"></g>
+      </svg>
+      <span class="needle"><i></i></span>
+      <span class="hub"></span>
+    </div>
+    <h1 id="homeTitle">Why is my PC slow?</h1>
+    <p id="homeText">Startshaper finds the apps that start by themselves and slow your computer down, tells you in plain words what each one is, and lets you switch them off. Every change can be undone with one click.</p>
+    <div class="cta">
+      <button id="checkBtn" class="primary lg">Check my PC</button>
+      <span class="hint">Takes a few seconds. Changes nothing until you say so.</span>
+    </div>
+    <ul class="steps" id="steps" hidden>
+      <li data-s="0">Reading what starts by itself</li>
+      <li data-s="1">Measuring memory and processor use</li>
+      <li data-s="2" id="stepBoot">Checking how long startup takes</li>
+    </ul>
+    <a class="made-by" href="https://hollowbit.dev/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M6 2h12a4 4 0 0 1 4 4v12a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4Zm9 13.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/></svg><span>A free app by <b>Hollowbit Studio</b>, makers of Diskshaper and Fileshaper</span><em>hollowbit.dev ↗</em></a>
+    <label class="upd-opt" title="Once a day, Startshaper asks GitHub for the latest version number. That is its only network request. Nothing about you or your computer is sent."><input type="checkbox" id="autoUpd" checked> Check for updates once a day</label>
+  </section>
+
+  <!-- startup -->
+  <section class="view" id="startup">
+    <div class="hero">
+      <h2 id="heroTitle"></h2>
+      <p id="heroSub"></p>
+      <div class="timeline" id="timeline" hidden>
+        <div class="tl-bar" id="tlBar"></div>
+        <div class="tl-scale"><span>Power on</span><span id="tlAfter"></span><span id="tlEnd"></span></div>
+      </div>
+      <div class="tiles" id="tiles"></div>
+      <div class="hero-cta">
+        <button class="primary" id="allSafe"></button>
+        <span class="hint" id="heroHint"></span>
+      </div>
+    </div>
+    <div id="groups"></div>
+  </section>
+
+  <!-- right now -->
+  <section class="view" id="now">
+    <div class="card memcard">
+      <div class="mem-head">
+        <div><div class="k">Memory in use</div><div class="big"><span id="memUsed">–</span><small id="memOf"></small></div></div>
+        <p class="mem-note" id="memNote"></p>
+      </div>
+      <div class="membar" id="memBar"></div>
+      <div class="legend" id="memLegend"></div>
+    </div>
+    <h3 class="sec-h">Using the most right now</h3>
+    <div class="list" id="apps"></div>
+  </section>
+
+  <!-- changes -->
+  <section class="view" id="changes">
+    <div class="ch-head"><h2>Changes</h2><button class="ghost sm" id="undoAll" hidden>Turn everything back on</button></div>
+    <p class="muted" id="changesNote">Everything you switch off is listed here. Startshaper never deletes anything, so turning an item back on puts it exactly how it was.</p>
+    <div class="list" id="history"></div>
+  </section>
+</main>
+
+<div class="toast" id="toast" hidden><span id="toastText"></span><button id="toastUndo">Undo</button></div>
+<div class="upd" id="upd" hidden><span id="updText"></span><button class="primary sm" id="updGet">Download</button><button class="ghost sm" id="updSkip">Later</button></div>
+
+<script src="app.js"></script>
+</body>
+</html>

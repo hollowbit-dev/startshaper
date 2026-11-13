@@ -1,0 +1,51 @@
+{
+  "name": "startshaper",
+  "productName": "Startshaper",
+  "version": "1.0.0",
+  "description": "Find out why your PC is slow and switch off what starts by itself. Free, offline, every change undoable. For Windows and Mac.",
+  "main": "src/main.js",
+  "private": true,
+  "author": "Hollowbit Studio",
+  "license": "MIT",
+  "homepage": "https://hollowbit.dev/startshaper/",
+  "repository": "github:hollowbit-dev/startshaper",
+  "scripts": {
+    "start": "electron .",
+    "demo": "STARTSHAPER_DEMO=1 electron .",
+    "scan": "node src/mac.js",
+    "test": "node test/win-parse.mjs && node test/shots.mjs && node test/packaged.mjs",
+    "icon": "swift scripts/make-icon.swift assets/icon.png && sips -z 1024 1024 assets/icon.png",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:win": "electron-builder --win --publish never",
+    "dist": "electron-builder --mac --win --publish never"
+  },
+  "devDependencies": {
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8",
+    "playwright": "1.48"
+  },
+  "build": {
+    "appId": "dev.hollowbit.startshaper",
+    "productName": "Startshaper",
+    "directories": { "output": "dist" },
+    "files": ["src/**/*", "assets/icon.png", "package.json"],
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["arm64", "x64"] }],
+      "category": "public.app-category.utilities",
+      "icon": "assets/icon.png",
+      "identity": null,
+      "artifactName": "Startshaper-${version}-mac-${arch}.${ext}"
+    },
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "assets/icon.png",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "Startshaper-Setup-${version}-win-x64.exe"
+    },
+    "afterPack": "scripts/after-pack.js"
+  }
+}
