@@ -127,5 +127,5 @@ ipcMain.handle('icon', async (e, p) => {
   return url;
 });
 
-app.whenReady().then(() => { create(); updates.schedule(); });
+app.whenReady().then(() => { require('./discord-menu').addDiscordMenu(); create(); updates.schedule(); });
 app.on('window-all-closed', () => app.quit());
